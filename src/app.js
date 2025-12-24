@@ -33,9 +33,16 @@ app.use(cors());
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  // Add this line below:
+  validate: { trustProxy: false }, 
+  standardHeaders: true,
+  legacyHeaders: false,
 });
+
+// And add this line to your Express app instance:
+app.set('trust proxy', 1);
 app.use(limiter);
 
 // Dev logging middleware
