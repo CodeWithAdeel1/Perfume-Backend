@@ -15,7 +15,7 @@ const cart = require('./routes/cart');
 const orders = require('./routes/orders');
 
 const app = express();
-
+app.set('trust proxy', 1); // Add this line!
 // Body parser
 app.use(express.json());
 
