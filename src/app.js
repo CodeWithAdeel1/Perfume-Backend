@@ -49,7 +49,13 @@ app.use(limiter);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
+// 1. ADD THIS: Root route to prevent 404 on the main URL
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Perfume Backend API is operational'
+  });
+});
 // Mount routers
 app.use('/api/auth', auth);
 app.use('/api/products', products);
