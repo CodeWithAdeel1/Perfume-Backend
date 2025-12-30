@@ -17,11 +17,21 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// const server = app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
+// IMPORTANT: Only start the server listener if NOT on Vercel
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+// Add this line at the bottom!
+module.exports = app;
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
